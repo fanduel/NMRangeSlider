@@ -642,16 +642,10 @@ NSUInteger DeviceSystemMajorVersion() {
         
         //if both upper and lower is selected, then the new value must be LOWER
         //otherwise the touch event is ignored.
-        if(!_upperHandle.highlighted || newValue<_lowerValue)
+        if(!_upperHandle.highlighted || newValue<=_lowerValue)
         {
-            _upperHandle.highlighted=NO;
             [self bringSubviewToFront:_lowerHandle];
-            
-            [self setLowerValue:newValue animated:_stepValueContinuously ? YES : NO];
-        }
-        else
-        {
-            _lowerHandle.highlighted=NO;
+            [self setLowerValue:newValue animated:_stepValueContinuously];
         }
     }
     
@@ -661,15 +655,10 @@ NSUInteger DeviceSystemMajorVersion() {
 
         //if both upper and lower is selected, then the new value must be HIGHER
         //otherwise the touch event is ignored.
-        if(!_lowerHandle.highlighted || newValue>_upperValue)
+        if(!_lowerHandle.highlighted || newValue>=_upperValue)
         {
-            _lowerHandle.highlighted=NO;
             [self bringSubviewToFront:_upperHandle];
-            [self setUpperValue:newValue animated:_stepValueContinuously ? YES : NO];
-        }
-        else
-        {
-            _upperHandle.highlighted=NO;
+            [self setUpperValue:newValue animated:_stepValueContinuously];
         }
     }
      
